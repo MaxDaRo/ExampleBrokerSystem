@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  auth_service:
+    build:
+      context: ./BrokerSystem.Services/AuthenticationService/
+      dockerfile: Dockerfile
+    container_name: auth-app
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: auth-app
+      SERVICE_TAGS: dev
+
+    networks: [
+        services-network
+      ]
+    ports:
+      - 4000:4000
+
+
+#Networks
+networks:
+  services-network:
+    driver: bridge
